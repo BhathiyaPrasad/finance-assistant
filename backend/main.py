@@ -7,11 +7,41 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import HTTPException
 import os 
 from dotenv import load_dotenv
+from langchain.llms import OpenAI
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import PromptTemplate
+from langchain.schema import SystemMessage, HumanMessage
+from fastapi import Body
+
+
+
 
 app = FastAPI()
 
+# Load Env 
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
+
+# Integrate Chat Model
+llm = ChatOpenAI(openai_api_key=openai_api_key)
+
+# Create First API to ASk things
+
+@app.post("/ask")
+async def ask_question(data: dict = Body(...)):
+    question = data.get('question')
+
+    # You can also include dynamic transaction data later.
+    prompt = f"""
+    You are a personal finance assistant. 
+    You help user based on their spending records. 
+    Right now, user asked: {question}
+    Based on available data or general finance rules, answer smartly.
+    """
+
+    response = llm.invoke([SystemMessage(content=prompt)])
+    return {"answer": response.content}
+
 
 
 # Allow CORS
