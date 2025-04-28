@@ -8,7 +8,7 @@ from fastapi import HTTPException
 import os 
 from dotenv import load_dotenv
 from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.schema import SystemMessage, HumanMessage
 from fastapi import Body
