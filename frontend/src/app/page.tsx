@@ -7,6 +7,7 @@ export default function Home() {
   const [category, setCategory] = useState('');
   const [note, setNote] = useState('');
   const [summary, setSummary] = useState('');
+  const [question , setQuestion ] = useState('');
 
   const addExpense = async () => {
     await fetch('http://localhost:8000/expense', {
@@ -46,11 +47,11 @@ export default function Home() {
       },
       body: JSON.stringify({ question: q }),
     });
-  
+
     const data = await res.json();
     alert(data.answer);
   };
-  
+
 
 
 
@@ -97,6 +98,25 @@ export default function Home() {
       >
         Check Monthly Limit
       </button>
+
+
+      {/* # llm Model */}
+
+      <div className="mt-4">
+        <input
+          type="text"
+          placeholder="Ask me about your expenses..."
+          className="border p-2 w-full mb-2"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+        />
+        <button
+          onClick={() => askQuestion(question)}
+          className="bg-purple-600 text-white px-4 py-2 rounded w-full"
+        >
+          Ask
+        </button>
+      </div>
 
 
       <div className="mt-6">
