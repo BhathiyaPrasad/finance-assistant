@@ -5,7 +5,8 @@ import sqlite3
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import HTTPException
-
+import os 
+from dotenv import load_dotenv
 
 app = FastAPI()
 
