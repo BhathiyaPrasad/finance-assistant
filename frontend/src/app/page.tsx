@@ -59,7 +59,7 @@ export default function Home() {
     try {
       const res = await fetch('http://localhost:8000/summary');
       const data = await res.json();
-      setSummary(data.summary); // Store the parsed object instead of stringified JSON
+      setSummary(data.summary); 
     } catch (error) {
       console.error('Error fetching summary:', error);
     }
