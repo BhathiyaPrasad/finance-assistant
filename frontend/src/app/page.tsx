@@ -1,10 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { DollarSign, PlusCircle, AlertCircle, MessageCircle, TrendingUp, Wallet, ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function Home() {
-  // State declarations
+
   const [type, setType] = useState('expense');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
@@ -43,7 +43,7 @@ export default function Home() {
       
       fetchSummary();
     } catch (error) {
-      setAlertMessage('Error adding transaction');
+      setAlertMessage('Error adding transaction' , error);
     }
     setIsLoading(false);
   };
