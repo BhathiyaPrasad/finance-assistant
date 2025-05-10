@@ -3,6 +3,13 @@ import { useState, useEffect } from 'react';
 import { DollarSign, PlusCircle, AlertCircle, MessageCircle, TrendingUp, Wallet, ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+
+
+type FinanceData = {
+  income: number;
+  expense: number;
+};
+
 export default function Home() {
 
   const [type, setType] = useState('expense');
@@ -75,7 +82,7 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const askQuestion = async (q) => {
+  const askQuestion = async (q:String) => {
     if (!q.trim()) {
       setAlertMessage('Please enter a question');
       return;
@@ -107,21 +114,21 @@ export default function Home() {
   }, []);
 
   // Calculate financial metrics
-  const netIncome = summary ? summary.income - summary.expense : 0;
-  const savingsRate = summary && summary.income > 0 ? ((summary.income - summary.expense) / summary.income * 100) : 0;
+  const netIncome: FinanceData[] = summary ? summary.income - summary.expense : 0;
+  const savingsRate: FinanceData[] = summary && summary.income > 0 ? ((summary.income - summary.expense) / summary.income * 100) : 0;
   
   // Prepare chart data
-  const pieData = summary ? [
+  const pieData: FinanceData[] = summary ? [
     { name: 'Available', value: summary.income - summary.expense, color: '#10B981' },
     { name: 'Expenses', value: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const barData = summary ? [
+  const barData: FinanceData[] = summary ? [
     { name: 'Income', amount: summary.income, color: '#10B981' },
     { name: 'Expenses', amount: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount:any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
