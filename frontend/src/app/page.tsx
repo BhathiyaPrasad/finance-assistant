@@ -114,12 +114,12 @@ export default function Home() {
   const savingsRate: number = summary && summary.income > 0 ? ((summary.income - summary.expense) / summary.income * 100) : 0;
 
   // Prepare chart data
-  const pieData: number = summary ? [
+  const pieData: ({ color: string; name: string; value: number } | { color: string; name: string; value: any })[] = summary ? [
     { name: 'Available', value: summary.income - summary.expense, color: '#10B981' },
     { name: 'Expenses', value: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const barData:number = summary ? [
+  const barData:({ amount: any; color: string; name: string } | { amount: any; color: string; name: string })[] = summary ? [
     { name: 'Income', amount: summary.income, color: '#10B981' },
     { name: 'Expenses', amount: summary.expense, color: '#EF4444' }
   ] : [];
