@@ -16,7 +16,7 @@ export default function Home() {
   const [category, setCategory] = useState('');
   const [note, setNote] = useState('');
   const [summary, setSummary] = useState<Summary | null>(null);
-  const [question, setQuestion] = useState('');
+  const [question, setQuestion] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [questionAnswer, setQuestionAnswer] = useState('');
@@ -128,7 +128,7 @@ export default function Home() {
     { name: 'Expenses', amount: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount:any) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -214,7 +214,7 @@ export default function Home() {
                 <textarea
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none"
                   placeholder="Additional details..."
-                  rows="3"
+                  rows={4}
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
                 />
@@ -251,7 +251,7 @@ export default function Home() {
                 <textarea
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-none"
                   placeholder="Ask me about your expenses, spending patterns, or financial advice..."
-                  rows="4"
+                  rows={4}
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                 />
