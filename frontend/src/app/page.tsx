@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { DollarSign, PlusCircle, AlertCircle, MessageCircle, TrendingUp, Wallet, ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+type Summary = {
+  income: number;
+  expense: number;
+};
 
 
 export default function Home() {
@@ -11,7 +15,7 @@ export default function Home() {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [note, setNote] = useState('');
-  const [summary, setSummary] = useState(null);
+  const [summary, setSummary] = useState<Summary | null>(null);
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -119,7 +123,7 @@ export default function Home() {
     { name: 'Expenses', value: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const barData:({ amount: any; color: string; name: string } | { amount: any; color: string; name: string })[] = summary ? [
+  const barData:({ amount: number; color: string; name: string })[] = summary ? [
     { name: 'Income', amount: summary.income, color: '#10B981' },
     { name: 'Expenses', amount: summary.expense, color: '#EF4444' }
   ] : [];
