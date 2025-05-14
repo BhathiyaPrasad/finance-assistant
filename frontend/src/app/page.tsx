@@ -92,7 +92,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto p-6 max-w-md">
-        {/* Robot Header */}
         <div className="flex items-center justify-center mb-8">
           <div className="rounded-full bg-blue-600 p-3 mr-3">
             <Bot size={32} />
@@ -102,7 +101,6 @@ export default function Home() {
           </h1>
         </div>
         
-        {/* Main Interface */}
         <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-6">
           <h2 className="text-xl font-semibold mb-4 flex items-center">
             <Wallet className="mr-2 text-blue-400" size={24} />
@@ -172,7 +170,6 @@ export default function Home() {
           </div>
         </div>
         
-        {/* AI Assistant Section */}
         <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 mb-6">
           <h2 className="text-xl font-semibold mb-4 flex items-center">
             <Bot className="mr-2 text-purple-400" size={24} />
@@ -199,7 +196,6 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Summary Section */}
         <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
           <h2 className="text-xl font-semibold mb-4 flex items-center">
             <PieChart className="mr-2 text-green-400" size={24} />
@@ -217,7 +213,7 @@ export default function Home() {
           )}
         </div>
         
-        {/* Footer */}
+    
         <div className="text-center mt-8 text-gray-400 text-sm">
           <p>FinBot v1.0 | Your Personal Finance Assistant</p>
         </div>
