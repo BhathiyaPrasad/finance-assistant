@@ -1,4 +1,3 @@
-# backend/main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 import sqlite3
@@ -18,20 +17,20 @@ from fastapi import Body
 
 app = FastAPI()
 
-# Load Env 
+
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 # Integrate Chat Model
 llm = ChatOpenAI(openai_api_key=openai_api_key)
 
-# Create First API to ASk things
+
 
 @app.post("/ask")
 async def ask_question(data: dict = Body(...)):
     question = data.get('question')
 
-    # You can also include dynamic transaction data later.
+   
     prompt = f"""
     You are a personal finance assistant. 
     You help user based on their spending records. 
@@ -44,7 +43,7 @@ async def ask_question(data: dict = Body(...)):
 
 
 
-# Allow CORS
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # You can replace "*" with ["http://localhost:3000"] for security
@@ -54,7 +53,7 @@ app.add_middleware(
 )
 
 
-# Connect to SQLite
+
 conn = sqlite3.connect("finance.db", check_same_thread=False)
 cursor = conn.cursor()
 cursor.execute('''
@@ -69,14 +68,14 @@ CREATE TABLE IF NOT EXISTS transactions (
 ''')
 conn.commit()
 
-# Request model
+
 class Transaction(BaseModel):
     type: str  # 'expense' or 'income'
     amount: float
     category: str
     note: str = ""
 
-# API to add a transaction
+
 @app.post("/expense")
 async def add_expense(transaction: Transaction):
     cursor.execute(
@@ -86,7 +85,7 @@ async def add_expense(transaction: Transaction):
     conn.commit()
     return {"message": "Transaction added successfully"}
 
-# API to get a summary
+
 @app.get("/summary")
 async def get_summary():
     cursor.execute("SELECT type, SUM(amount) FROM transactions GROUP BY type")
@@ -97,7 +96,7 @@ async def get_summary():
 
 ALERT_LIMIT = 1000  # Dollars
 
-# API to check if user exceeded the limit
+
 @app.get("/alert")
 async def check_alert():
     cursor.execute('''
