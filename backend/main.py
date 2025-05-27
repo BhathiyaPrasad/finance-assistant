@@ -109,3 +109,15 @@ async def check_alert():
         raise HTTPException(status_code=400, detail=f"⚠️ Alert! Expenses exceeded ${ALERT_LIMIT}. Current: ${total:.2f}")
     
     return {"message": f"✅ Safe! Total expenses this month: ${total:.2f}"}
+
+
+@app.post('/create_category')
+async def create_new_category():
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS categories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE
+        )
+    ''')
+    conn.commit()
+    return {"message": "Categories table created or already exists."}
