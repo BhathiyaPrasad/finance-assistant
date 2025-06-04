@@ -21,7 +21,6 @@ app = FastAPI()
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-# Integrate Chat Model
 llm = ChatOpenAI(openai_api_key=openai_api_key)
 
 
@@ -46,7 +45,7 @@ async def ask_question(data: dict = Body(...)):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can replace "*" with ["http://localhost:3000"] for security
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,7 +69,7 @@ conn.commit()
 
 
 class Transaction(BaseModel):
-    type: str  # 'expense' or 'income'
+    type: str  
     amount: float
     category: str
     note: str = ""
@@ -94,7 +93,7 @@ async def get_summary():
 
 
 
-ALERT_LIMIT = 1000  # Dollars
+ALERT_LIMIT = 1000  
 
 
 @app.get("/alert")
