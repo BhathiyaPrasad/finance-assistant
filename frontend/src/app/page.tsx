@@ -5,11 +5,6 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
 
 
 
-type FinanceData = {
-  income: number;
-  expense: number;
-};
-
 export default function Home() {
 
   const [type, setType] = useState('expense');
@@ -48,9 +43,10 @@ export default function Home() {
       setNote('');
       setAlertMessage('Transaction added successfully!');
       
-      fetchSummary();
+      return fetchSummary();
     } catch (error) {
-      setAlertMessage('Error adding transaction' , error);
+      setAlertMessage('Error adding transaction');
+      console.log("error" ,error )
     }
     setIsLoading(false);
   };
@@ -82,7 +78,7 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const askQuestion = async (q:String) => {
+  const askQuestion = async (q:string) => {
     if (!q.trim()) {
       setAlertMessage('Please enter a question');
       return;
@@ -114,21 +110,21 @@ export default function Home() {
   }, []);
 
   // Calculate financial metrics
-  const netIncome: FinanceData[] = summary ? summary.income - summary.expense : 0;
-  const savingsRate: FinanceData[] = summary && summary.income > 0 ? ((summary.income - summary.expense) / summary.income * 100) : 0;
-  
+  const netIncome: number = summary ? summary.income - summary.expense : 0;
+  const savingsRate: number = summary && summary.income > 0 ? ((summary.income - summary.expense) / summary.income * 100) : 0;
+
   // Prepare chart data
-  const pieData: FinanceData[] = summary ? [
+  const pieData: number = summary ? [
     { name: 'Available', value: summary.income - summary.expense, color: '#10B981' },
     { name: 'Expenses', value: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const barData: FinanceData[] = summary ? [
+  const barData:number = summary ? [
     { name: 'Income', amount: summary.income, color: '#10B981' },
     { name: 'Expenses', amount: summary.expense, color: '#EF4444' }
   ] : [];
 
-  const formatCurrency = (amount:any) => {
+  const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -267,7 +263,7 @@ export default function Home() {
 
               {questionAnswer && (
                 <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <h3 className="font-semibold text-green-800 mb-2">Assistant's Answer:</h3>
+                  <h3 className="font-semibold text-green-800 mb-2">Assistant &apos s Answer:</h3>
                   <p className="text-green-700">{questionAnswer}</p>
                 </div>
               )}
